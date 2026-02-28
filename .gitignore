@@ -92,3 +92,5 @@ gpt_computer/benchmark/benchmarks/mbpp/dataset
 gpt_computer/benchmark/minimal_bench_config.toml
 
 test.json
+
+__MACOSX/*

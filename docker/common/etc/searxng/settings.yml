@@ -1,0 +1,39 @@
+# SearXNG settings
+
+use_default_settings:
+  engines:
+    remove:
+      - radio browser
+
+server:
+  port: 8888
+  bind_address: "0.0.0.0"
+  secret_key: "ultrasecretkey" # You should change this or use environment variable
+
+search:
+  safe_search: 0
+  autocomplete: "google"
+
+ui:
+  static_path: ""
+  templates_path: ""
+  theme: simple
+
+enabled_plugins:
+  - 'Hash plugin'
+  - 'Self Information'
+  - 'Tracker-aware link redirection'
+  - 'Open Access DOI rewrite'
+  - 'Hostname replace'
+
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+  - name: radio browser
+    engine: radio_browser
+    disabled: true
+    inactive: true

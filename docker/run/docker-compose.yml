@@ -1,0 +1,8 @@
+services:
+  gpt-computer:
+    container_name: gpt-computer
+    image: xeondesk/gpt-computer:latest
+    volumes:
+      - ./gpt-computer:/gptc
+    ports:
+      - "50080:80"

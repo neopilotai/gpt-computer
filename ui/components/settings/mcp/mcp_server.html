@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>GPTC MCP Server</title>
+</head>
+
+<body>
+  <div x-data="{ get settings() { return $store.settingsStore.settings } }">
+    <template x-if="settings">
+      <div>
+        <div class="section-title">GPTC MCP Server</div>
+        <div class="section-description">
+          GPT Computer can be exposed as an SSE MCP server. See <a
+            href="javascript:openModal('settings/mcp/server/example.html')">connection example</a>.
+        </div>
+
+        <div class="field">
+          <div class="field-label">
+            <div class="field-title">Enable GPTC MCP Server</div>
+            <div class="field-description">
+              Expose GPT Computer as an SSE/HTTP MCP server. This will make this GPTC instance available to MCP clients.
+            </div>
+          </div>
+          <div class="field-control">
+            <label class="toggle">
+              <input type="checkbox" x-model="settings.mcp_server_enabled" />
+              <span class="toggler"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</body>
+
+</html>

@@ -384,54 +384,15 @@ def main(
         "--diff_timeout",
         help="Diff regexp timeout. Default: 3. Increase if regexp search timeouts.",
     ),
+    autonomous: bool = typer.Option(
+        False,
+        "--autonomous",
+        "-A",
+        help="Run in autonomous mode.",
+    ),
 ):
     """
     The main entry point for the CLI tool that generates or improves a project.
-
-    This function sets up the CLI tool, loads environment variables, initializes
-    the AI, and processes the user's request to generate or improve a project
-    based on the provided arguments.
-
-    Parameters
-    ----------
-    project_path : str
-        The file path to the project directory.
-    model : str
-        The model ID string for the AI.
-    temperature : float
-        The temperature setting for the AI's responses.
-    improve_mode : bool
-        Flag indicating whether to improve an existing project.
-    lite_mode : bool
-        Flag indicating whether to run in lite mode.
-    clarify_mode : bool
-        Flag indicating whether to discuss specifications with AI before implementation.
-    self_heal_mode : bool
-        Flag indicating whether to enable self-healing mode.
-    azure_endpoint : str
-        The endpoint for Azure OpenAI services.
-    use_custom_preprompts : bool
-        Flag indicating whether to use custom preprompts.
-    prompt_file : str
-        Relative path to a text file containing a prompt.
-    entrypoint_prompt_file: str
-        Relative path to a text file containing a file that specifies requirements for you entrypoint.
-    image_directory: str
-        Relative path to a folder containing images.
-    use_cache: bool
-        Speeds up computations and saves tokens when running the same prompt multiple times by caching the LLM response.
-    verbose : bool
-        Flag indicating whether to enable verbose logging.
-    skip_file_selection: bool
-        Skip interactive file selection in improve mode and use the generated TOML file directly
-    no_execution: bool
-        Run setup but to not call LLM or write any code. For testing purposes.
-    sysinfo: bool
-        Flag indicating whether to output system information for debugging.
-
-    Returns
-    -------
-    None
     """
 
     if debug:
@@ -460,6 +421,21 @@ def main(
         ), "Clarify and lite mode are not active for improve mode"
 
     load_env_if_needed()
+
+    if autonomous:
+        from gpt_computer.core.agent_runtime import AgentRuntime
+        import asyncio
+        
+        runtime = AgentRuntime()
+        prompt_text = "Hello, what can you do?"
+        if os.path.isfile(prompt_file):
+            with open(prompt_file, "r") as f:
+                prompt_text = f.read()
+        elif prompt_file != "prompt":
+            prompt_text = prompt_file
+            
+        asyncio.run(runtime.run(prompt_text))
+        return
 
     if llm_via_clipboard:
         ai = ClipboardAI()

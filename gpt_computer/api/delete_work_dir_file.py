@@ -1,0 +1,32 @@
+from gpt_computer.api import get_work_dir_files
+from gpt_computer.helpers import runtime
+from gpt_computer.helpers.api import ApiHandler, Input, Output, Request
+from gpt_computer.helpers.file_browser import FileBrowser
+
+
+class DeleteWorkDirFile(ApiHandler):
+    async def process(self, input: Input, request: Request) -> Output:
+        try:
+            file_path = input.get("path", "")
+            if not file_path.startswith("/"):
+                file_path = f"/{file_path}"
+
+            current_path = input.get("currentPath", "")
+
+            # browser = FileBrowser()
+            res = await runtime.call_development_function(delete_file, file_path)
+
+            if res:
+                # Get updated file list
+                # result = browser.get_files(current_path)
+                result = await runtime.call_development_function(get_work_dir_files.get_files, current_path)
+                return {"data": result}
+            else:
+                return {"error": "File not found or could not be deleted"}
+        except Exception as e:
+            return {"error": str(e)}
+
+
+async def delete_file(file_path: str):
+    browser = FileBrowser()
+    return browser.delete_file(file_path)
