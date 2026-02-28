@@ -88,7 +88,6 @@ def test_cli_execution():
 @pytest.mark.requires_key
 def test_installed_main_execution(tmp_path, monkeypatch):
     import os
-    import shutil
 
     if shutil.which("gptc") is None:
         pytest.skip("gptc command not available")
