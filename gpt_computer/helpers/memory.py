@@ -19,7 +19,7 @@ from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_core.documents import Document
 from simpleeval import simple_eval
 
-import models
+from gpt_computer.core import models
 
 from agent import Agent, AgentContext
 

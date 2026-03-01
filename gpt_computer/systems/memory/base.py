@@ -20,14 +20,14 @@ from langchain_core.documents import Document
 from simpleeval import simple_eval
 
 from agent import Agent, AgentContext
-from gpt_computer.core import llm as models
+from gpt_computer.core import models
 
 # faiss needs to be patched for python 3.12 on arm #TODO remove once not needed
-from gpt_computer.helpers import guids, knowledge_import
+from gpt_computer.helpers import guids, knowledge_import, files
 from gpt_computer.helpers.log import LogItem
 from gpt_computer.helpers.print_style import PrintStyle
 
-from . import files
+# from . import files
 
 # Raise the log level so WARNING messages aren't shown
 logging.getLogger("langchain_core.vectorstores.base").setLevel(logging.ERROR)

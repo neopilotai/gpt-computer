@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Awaitable, Coroutine, Dict, Literal
 from enum import Enum
-import models
+from gpt_computer.core import models
 
 from gpt_computer.helpers import (
     extract_tools,

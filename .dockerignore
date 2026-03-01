@@ -95,6 +95,7 @@ usr/*
 ###############################################################################
 # OS / editor junk
 **/.DS_Store
+
 **/Thumbs.db
 
 # Python caches / compiled artefacts

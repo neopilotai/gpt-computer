@@ -6,7 +6,7 @@ import subprocess
 
 from typing import Any, Literal, TypedDict, TypeVar, cast
 
-import models
+from gpt_computer.core import models
 
 from gpt_computer.helpers import defer, git, runtime, whisper
 from gpt_computer.helpers.notification import (

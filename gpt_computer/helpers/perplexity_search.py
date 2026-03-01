@@ -1,7 +1,7 @@
 
 from openai import OpenAI
 
-import models
+from gpt_computer.core import models
 
 
 def perplexity_search(query:str, model_name="llama-3.1-sonar-large-128k-online",api_key=None,base_url="https://api.perplexity.ai"):

@@ -56,6 +56,8 @@ def _get_handler_classes(module: ModuleType) -> list[type[WebSocketHandler]]:
             continue
         if not issubclass(cls, WebSocketHandler):
             continue
+        # Debug prints
+        print(f"Checking class: {cls.__name__}, module: {cls.__module__}, expected: {module.__name__}")
         if cls.__module__ != module.__name__:
             continue
         discovered.append(cls)

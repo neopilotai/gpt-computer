@@ -1,4 +1,4 @@
-from gpt_computer.core import llm as models
+from gpt_computer.core import models
 from gpt_computer.helpers import settings as settings_helper
 from gpt_computer.helpers.extension import Extension
 

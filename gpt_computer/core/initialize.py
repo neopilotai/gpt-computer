@@ -1,5 +1,5 @@
 from agent import AgentConfig
-from gpt_computer.core import llm as models
+from gpt_computer.core import models
 from gpt_computer.helpers import defer, runtime, settings
 
 

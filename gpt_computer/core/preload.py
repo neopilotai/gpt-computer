@@ -1,6 +1,6 @@
 import asyncio
 
-import models
+from gpt_computer.core import models
 
 from gpt_computer.helpers import kokoro_tts, runtime, settings, whisper
 from gpt_computer.helpers.print_style import PrintStyle
