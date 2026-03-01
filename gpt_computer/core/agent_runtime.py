@@ -1,8 +1,9 @@
-import nest_asyncio
-import uuid
-from typing import List, Any, Dict, Optional
 
-from gpt_computer.core.context import AgentContext, UserMessage, AgentContextType, AgentConfig
+from typing import Any, Dict, Optional
+
+import nest_asyncio
+
+from gpt_computer.core.context import AgentConfig, AgentContext, UserMessage
 
 nest_asyncio.apply()
 
@@ -36,10 +37,10 @@ class Agent:
 
     def hist_add_user_message(self, msg: UserMessage):
         self.context.log.log(type="user", content=msg.message)
-    
+
     def read_prompt(self, name: str) -> str:
         return f"Prompt {name}"
-        
+
     def hist_add_tool_result(self, name: str, result: str, **kwargs):
         self.context.log.log(type="tool", heading=f"Tool {name} result", content=result)
 
@@ -47,7 +48,7 @@ class AgentRuntime:
     def __init__(self, config: Optional[AgentConfig] = None):
         self.config = config or AgentConfig()
         self.context = AgentContext(config=self.config, name="AutonomousAgent")
-        self.agent = self.context.agent0
+        self.agent = self.context.gptc
 
     async def run(self, message: str):
         self.context.log.log(type="info", content=f"Starting autonomous runtime for message: {message}")

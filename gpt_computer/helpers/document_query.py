@@ -5,7 +5,7 @@ import os
 
 import aiohttp
 
-from gpt_computer.systems.memory.vector_db import VectorDB
+from gpt_computer.helpers.vector_db import VectorDB
 
 os.environ["USER_AGENT"] = "@mixedbread-ai/unstructured"  # noqa E402
 from langchain_unstructured import UnstructuredLoader  # noqa E402

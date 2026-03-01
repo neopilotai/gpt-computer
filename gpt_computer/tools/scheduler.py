@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 
 from gpt_computer.helpers import projects
+from gpt_computer.helpers.tool import Response, Tool
 from gpt_computer.systems.scheduler.task_scheduler import (
     AdHocTask,
     PlannedTask,
@@ -14,7 +15,6 @@ from gpt_computer.systems.scheduler.task_scheduler import (
     TaskScheduler,
     TaskState,
 )
-from gpt_computer.helpers.tool import Response, Tool
 
 
 class Scheduler(Tool):

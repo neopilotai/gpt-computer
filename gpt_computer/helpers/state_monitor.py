@@ -15,7 +15,7 @@ from gpt_computer.helpers.state_snapshot import (
     advance_state_request_after_snapshot,
     build_snapshot_from_request,
 )
-from gpt_computer.systems.communication.websocket import ConnectionNotFoundError
+from gpt_computer.helpers.websocket import ConnectionNotFoundError
 
 if TYPE_CHECKING:  # pragma: no cover - hints only
     from gpt_computer.helpers.websocket_manager import WebSocketManager
@@ -25,7 +25,7 @@ ConnectionIdentity = tuple[str, str]  # (namespace, sid)
 
 
 def _ws_debug_enabled() -> bool:
-    value = os.getenv("A0_WS_DEBUG", "").strip().lower()
+    value = os.getenv("GPTC_WS_DEBUG", "").strip().lower()
     return value in {"1", "true", "yes", "on"}
 
 

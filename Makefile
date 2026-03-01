@@ -71,6 +71,14 @@ install: ## Install dependencies (dev + docs) and setup pre-commit
 	uv run pre-commit install
 	@echo -e "$(COLOR_GREEN)Installation complete!$(COLOR_RESET)"
 
+init: install ## Initialize the project (alias for install)
+	@echo -e "$(COLOR_CYAN)Project initialized!$(COLOR_RESET)"
+	uv run initialize.py
+
+tunnel: ## Start the tunnel server
+	@echo -e "$(COLOR_CYAN)Starting tunnel server...$(COLOR_RESET)"
+	uv run run_tunnel.py
+
 update: ## Update dependencies and lockfile
 	@echo -e "$(COLOR_CYAN)Updating dependencies...$(COLOR_RESET)"
 	uv lock --upgrade
@@ -142,6 +150,18 @@ clean-all: clean ## Remove all build artifacts and virtualenv
 build: ## Build the package
 	@echo -e "$(COLOR_CYAN)Building package...$(COLOR_RESET)"
 	uv build
+
+prepare: ## Prepare the environment (dotenv, runtime setup, etc.)
+	@echo -e "$(COLOR_CYAN)Preparing environment...$(COLOR_RESET)"
+	uv run python prepare.py
+
+preload: ## Preload models and resources
+	@echo -e "$(COLOR_CYAN)Preloading models and resources...$(COLOR_RESET)"
+	uv run python preload.py
+
+ui: ## Start the UI server
+	@echo -e "$(COLOR_CYAN)Starting UI server...$(COLOR_RESET)"
+	uv run run_ui.py
 
 cloc: ## Count lines of code
 	@if command -v cloc > /dev/null; then \

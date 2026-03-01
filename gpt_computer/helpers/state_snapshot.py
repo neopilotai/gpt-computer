@@ -10,7 +10,7 @@ import pytz  # type: ignore[import-untyped]
 from agent import AgentContext, AgentContextType
 from gpt_computer.helpers.dotenv import get_dotenv_value
 from gpt_computer.helpers.localization import Localization
-from gpt_computer.systems.scheduler.task_scheduler import TaskScheduler
+from gpt_computer.helpers.task_scheduler import TaskScheduler
 
 
 class SnapshotV1(TypedDict):

@@ -24,7 +24,7 @@ Best practices for containerization, orchestration, and deployment pipelines.
 
 ```dockerfile
 # Use specific version tags
-FROM python:3.11-slim
+from gpt_computer:3.11-slim
 
 # Set working directory
 WORKDIR /app

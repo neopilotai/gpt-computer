@@ -1,0 +1,27 @@
+name: Periodic System Optimization
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Run every Sunday at midnight
+  workflow_dispatch:    # Allow manual trigger
+
+jobs:
+  optimize:
+    name: Run Optimization Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Optimization Script
+        run: |
+          chmod +x scripts/optimize_system.sh
+          ./scripts/optimize_system.sh
+        shell: bash
+
+      - name: Post-Optimization Report
+        run: |
+          echo "### Optimization Report" >> $GITHUB_STEP_SUMMARY
+          echo "System optimization completed successfully." >> $GITHUB_STEP_SUMMARY
+          df -h / >> $GITHUB_STEP_SUMMARY
+          free -h >> $GITHUB_STEP_SUMMARY

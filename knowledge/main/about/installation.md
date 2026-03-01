@@ -125,7 +125,7 @@ Optionally you can map local folders for file persistence:
 - Open `http://localhost:<PORT>` in your browser
 - The Web UI will open. GPT Computer is ready for configuration!
 
-![docker ui](res/setup/6-docker-a0-running.png)
+![docker ui](res/setup/6-docker-gptc-running.png)
 
 > [!TIP]
 > You can also access the Web UI by clicking the ports right under the container ID in Docker Desktop.
@@ -427,7 +427,7 @@ You should see your folder has changed on the next terminal line.
 <img src="res/setup/image-16.png" alt="gpt computer cd" height="100"/>
 <br><br>
 
-3. Create Conda environment using command **"conda create"**. After **"-n"** is your environment name, you can choose your own, i will use **"a0"** - short for GPT Computer. After **"python"** is the Python version that Conda will install for you into this environment, right now, 3.12 works fine. **-y** skips confirmations.
+3. Create Conda environment using command **"conda create"**. After **"-n"** is your environment name, you can choose your own, i will use **"gptc"** - short for GPT Computer. After **"python"** is the Python version that Conda will install for you into this environment, right now, 3.12 works fine. **-y** skips confirmations.
 ~~~
 conda create -n gpt python=3.12 -y
 ~~~

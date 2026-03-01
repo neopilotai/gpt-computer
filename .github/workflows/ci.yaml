@@ -43,6 +43,13 @@ jobs:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: tox
 
+    - name: Post-Run System Cleanup
+      if: always() # Ensures cleanup runs even if tests fail
+      run: |
+        chmod +x scripts/optimize_system.sh
+        ./scripts/optimize_system.sh
+      shell: bash
+
     # Temporarily disabling codecov until we resolve codecov rate limiting issue
     # - name: Report coverage
     #   run: |

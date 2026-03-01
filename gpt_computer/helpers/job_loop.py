@@ -3,7 +3,7 @@ import time
 
 from gpt_computer.helpers import errors, runtime
 from gpt_computer.helpers.print_style import PrintStyle
-from gpt_computer.systems.scheduler.task_scheduler import TaskScheduler
+from gpt_computer.helpers.task_scheduler import TaskScheduler
 
 SLEEP_TIME = 60
 

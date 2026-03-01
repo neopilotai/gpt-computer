@@ -14,7 +14,7 @@ from gpt_computer.systems.skills.manager import discover_skill_md_files
 ConflictPolicy = Literal["skip", "overwrite", "rename"]
 DestSubdir = Literal["custom", "project"]
 
-# Project skills folder name (inside .a0proj)
+# Project skills folder name (inside .gptcproj)
 PROJECT_SKILLS_DIR = "skills"
 
 
@@ -187,7 +187,7 @@ def import_skills(
     """
     Import external Skills into usr/skills/<dest_subdir>/<namespace>/...
 
-    If dest_subdir is "project", imports into the project's .a0proj/skills/ folder.
+    If dest_subdir is "project", imports into the project's .gptcproj/skills/ folder.
 
     - source_path can be a directory or a .zip file
     - Uses heuristics to detect the Skills root(s)

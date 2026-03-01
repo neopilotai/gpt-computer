@@ -1,7 +1,6 @@
-from initialize import initialize_agent
-
 from gpt_computer.helpers import dirty_json, files, subagents
 from gpt_computer.helpers.extension import Extension
+from initialize import initialize_agent
 
 
 class LoadProfileSettings(Extension):

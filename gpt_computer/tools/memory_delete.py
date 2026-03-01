@@ -1,5 +1,5 @@
-from gpt_computer.systems.memory.base import Memory
 from gpt_computer.helpers.tool import Response, Tool
+from gpt_computer.systems.memory.base import Memory
 
 
 class MemoryDelete(Tool):

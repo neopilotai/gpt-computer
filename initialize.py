@@ -1,7 +1,6 @@
 from agent import AgentConfig
 from gpt_computer.core import llm as models
-from gpt_computer.helpers import runtime, settings, defer
-from gpt_computer.helpers.print_style import PrintStyle
+from gpt_computer.helpers import defer, runtime, settings
 
 
 def initialize_agent(override_settings: dict | None = None):
@@ -141,7 +140,7 @@ def initialize_preload():
     return defer.DeferredTask().start_task(preload.preload)
 
 def initialize_migration():
-    from gpt_computer.helpers import migration, dotenv
+    from gpt_computer.helpers import dotenv, migration
     # run migration
     migration.migrate_user_data()
     # reload .env as it might have been moved

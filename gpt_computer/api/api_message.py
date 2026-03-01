@@ -4,14 +4,13 @@ import threading
 
 from datetime import datetime, timedelta
 
-from initialize import initialize_agent
-
 from agent import AgentContext, AgentContextType, UserMessage
 from gpt_computer.helpers import files, projects
 from gpt_computer.helpers.api import ApiHandler, Request, Response
 from gpt_computer.helpers.print_style import PrintStyle
 from gpt_computer.helpers.projects import activate_project
 from gpt_computer.helpers.security import safe_filename
+from initialize import initialize_agent
 
 
 class ApiMessage(ApiHandler):
@@ -51,7 +50,7 @@ class ApiMessage(ApiHandler):
         # Handle attachments (base64 encoded)
         attachment_paths = []
         if attachments:
-            upload_folder_int = "/a0/usr/uploads"
+            upload_folder_int = "/gptc/usr/uploads"
             upload_folder_ext = files.get_abs_path("usr/uploads")
             os.makedirs(upload_folder_ext, exist_ok=True)
 
@@ -84,7 +83,7 @@ class ApiMessage(ApiHandler):
                 return Response('{"error": "Context not found"}', status=404, mimetype="application/json")
 
             # Validation: if agent profile is provided, it must match the exising
-            if agent_profile and context.agent0.config.profile != agent_profile:
+            if agent_profile and context.gptc.config.profile != agent_profile:
                 return Response('{"error": "Cannot override agent profile on existing context"}', status=400, mimetype="application/json")
 
 

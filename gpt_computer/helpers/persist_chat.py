@@ -5,11 +5,10 @@ from collections import OrderedDict
 from datetime import datetime
 from typing import Any
 
-from initialize import initialize_agent
-
 from agent import Agent, AgentConfig, AgentContext, AgentContextType
 from gpt_computer.helpers import files, history
 from gpt_computer.helpers.log import Log, LogItem
+from initialize import initialize_agent
 
 CHATS_FOLDER = "usr/chats"
 LOG_SIZE = 1000
@@ -120,7 +119,7 @@ def remove_msg_files(ctxid):
 def _serialize_context(context: AgentContext):
     # serialize agents
     agents = []
-    agent = context.agent0
+    agent = context.gptc
     while agent:
         agents.append(_serialize_agent(agent))
         agent = agent.data.get(Agent.DATA_NAME_SUBORDINATE, None)
@@ -204,17 +203,17 @@ def _deserialize_context(data):
         paused=False,
         data=data.get("data", {}),
         output_data=data.get("output_data", {}),
-        # agent0=agent0,
+        # gptc=gptc,
         # streaming_agent=straming_agent,
     )
 
     agents = data.get("agents", [])
-    agent0 = _deserialize_agents(agents, config, context)
-    streaming_agent = agent0
+    gptc = _deserialize_agents(agents, config, context)
+    streaming_agent = gptc
     while streaming_agent and streaming_agent.number != data.get("streaming_agent", 0):
         streaming_agent = streaming_agent.data.get(Agent.DATA_NAME_SUBORDINATE, None)
 
-    context.agent0 = agent0
+    context.gptc = gptc
     context.streaming_agent = streaming_agent
 
     return context

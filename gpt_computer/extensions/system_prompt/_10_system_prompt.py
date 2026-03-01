@@ -3,8 +3,8 @@ from typing import Any
 from agent import Agent, LoopData
 from gpt_computer.helpers import projects, skills
 from gpt_computer.helpers.extension import Extension
-from gpt_computer.systems.mcp.handler import MCPConfig
 from gpt_computer.helpers.settings import get_settings
+from gpt_computer.systems.mcp.handler import MCPConfig
 
 
 class SystemPrompt(Extension):

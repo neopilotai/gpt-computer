@@ -3,7 +3,7 @@ name = "gpt-computer"
 version = "0.1.1"
 description = "Specify what you want it to build, the AI asks for clarification, and then builds it."
 readme = "README.md"
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.11,<3.13"
 license = {text = "MIT"}
 authors = [
   {name = "Md Sulaiman", email = "infosulaimanbd@gmail.com"}
@@ -93,7 +93,7 @@ dependencies = [
   "python-socketio>=5.14.2",
   "uvicorn>=0.38.0",
   "wsproto>=1.2.0",
-  "litellm>=1.79.3"
+  "litellm>=1.79.3",
 ]
 
 [project.urls]

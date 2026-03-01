@@ -51,8 +51,8 @@ def get_skill_roots(
         paths = subagents.get_paths(agent, "skills")
     else:
         # skill roots available globally
-        project_agents = files.find_existing_paths_by_pattern("usr/projects/*/.a0proj/agents/*/skills") # agents in projects
-        projects = files.find_existing_paths_by_pattern("usr/projects/*/.a0proj/skills") # projects
+        project_agents = files.find_existing_paths_by_pattern("usr/projects/*/.gptcproj/agents/*/skills") # agents in projects
+        projects = files.find_existing_paths_by_pattern("usr/projects/*/.gptcproj/skills") # projects
         usr_agents = files.find_existing_paths_by_pattern("usr/agents/*/skills") # agents
         agents = files.find_existing_paths_by_pattern("agents/*/skills") # agents
         paths = [
@@ -374,7 +374,7 @@ def load_skill_for_agent(
     # Get runtime path
     runtime_path = str(skill.path)
     if runtime.is_development():
-        runtime_path = files.normalize_a0_path(str(skill.path))
+        runtime_path = files.normalize_gptc_path(str(skill.path))
 
     lines = [f"Skill: {skill.name}", f"Path: {runtime_path}"]
 
@@ -427,7 +427,7 @@ def _get_skill_files(skill_dir: Path) -> str:
     )
 
     if tree and runtime.is_development():
-        runtime_path = files.normalize_a0_path(str(skill_dir))
+        runtime_path = files.normalize_gptc_path(str(skill_dir))
         tree = tree.replace(str(skill_dir), runtime_path)
 
     return str(tree)

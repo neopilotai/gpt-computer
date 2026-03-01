@@ -1,14 +1,15 @@
 import threading
 import uuid
+
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Dict, List, Optional, TYPE_CHECKING
 from enum import Enum
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 from gpt_computer.helpers.log import Log
 
 if TYPE_CHECKING:
-    from gpt_computer.core.agent_runtime import Agent
+    pass
 
 @dataclass
 class UserMessage:
@@ -38,7 +39,7 @@ class AgentContext:
     _contexts: Dict[str, "AgentContext"] = {}
     _contexts_lock = threading.RLock()
     _current_context = threading.local()
-    
+
     def __init__(self, config: AgentConfig = None, id: Optional[str] = None, name: str = "Agent", type: AgentContextType = AgentContextType.USER, log: Log = None):
         self.id = id or str(uuid.uuid4())
         self.name = name
@@ -47,15 +48,15 @@ class AgentContext:
         self.last_message = datetime.now()
         self.data: Dict[str, Any] = {}
         self.output_data: Dict[str, Any] = {}
-        
+
         self.log = log or Log()
         self.log.context = self
         self.config = config or AgentConfig()
-        
+
         # Initialize default agent
         from gpt_computer.core.agent_runtime import Agent
-        self.agent0 = Agent(self, number=0)
-        self.streaming_agent = self.agent0
+        self.gptc = Agent(self, number=0)
+        self.streaming_agent = self.gptc
 
         with AgentContext._contexts_lock:
             AgentContext._contexts[self.id] = self

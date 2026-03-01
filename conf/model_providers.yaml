@@ -17,11 +17,11 @@
 #                     This is useful for `api_base`, `extra_headers`, etc.
 
 chat:
-  a0_venice:
+  gptc_venice:
     name: GPT Computer API
     litellm_provider: openai
     kwargs:
-      api_base: https://llm.gpt-computer.ai/v1
+      api_base: https://gpt-llm.khulnasoft.com/v1
       venice_parameters:
         include_venice_system_prompt: false
   anthropic:

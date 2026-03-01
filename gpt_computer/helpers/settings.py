@@ -6,7 +6,7 @@ import subprocess
 
 from typing import Any, Literal, TypedDict, TypeVar, cast
 
-from gpt_computer.core import llm as models
+import models
 
 from gpt_computer.helpers import defer, git, runtime, whisper
 from gpt_computer.helpers.notification import (
@@ -24,16 +24,16 @@ T = TypeVar('T')
 
 def get_default_value(name: str, value: T) -> T:
     """
-    Load setting value from .env with A0_SET_ prefix, falling back to default.
+    Load setting value from .env with GPTC_SET_ prefix, falling back to default.
 
     Args:
-        name: Setting name (will be prefixed with A0_SET_)
+        name: Setting name (will be prefixed with GPTC_SET_)
         value: Default value to use if env var not set
 
     Returns:
         Environment variable value (type-normalized) or default value
     """
-    env_value = dotenv.get_dotenv_value(f"A0_SET_{name}", dotenv.get_dotenv_value(f"A0_SET_{name.upper()}", None))
+    env_value = dotenv.get_dotenv_value(f"GPTC_SET_{name}", dotenv.get_dotenv_value(f"GPTC_SET_{name.upper()}", None))
 
     if env_value is None:
         return value
@@ -50,7 +50,7 @@ def get_default_value(name: str, value: T) -> T:
             return type(value)(env_value.strip())  # type: ignore
     except (ValueError, TypeError, json.JSONDecodeError) as e:
         PrintStyle(background_color="yellow", font_color="black").print(
-            f"Warning: Invalid value for A0_SET_{name}='{env_value}': {e}. Using default: {value}"
+            f"Warning: Invalid value for GPTC_SET_{name}='{env_value}': {e}. Using default: {value}"
         )
         return value
 
@@ -425,11 +425,11 @@ def normalize_settings(settings: Settings) -> Settings:
 
 
 def _adjust_to_version(settings: Settings, default: Settings):
-    # starting with 0.9, the default prompt subfolder for agent no. 0 is agent0
-    # switch to agent0 if the old default is used from v0.8
+    # starting with 0.9, the default prompt subfolder for agent no. 0 is gptc
+    # switch to gptc if the old default is used from v0.8
     if "version" not in settings or settings["version"].startswith("v0.8"):
         if "agent_profile" not in settings or settings["agent_profile"] == "default":
-            settings["agent_profile"] = "agent0"
+            settings["agent_profile"] = "gptc"
 
 
 
@@ -537,7 +537,7 @@ def get_default_settings() -> Settings:
         auth_login="",
         auth_password="",
         root_password="",
-        agent_profile=get_default_value("agent_profile", "agent0"),
+        agent_profile=get_default_value("agent_profile", "gptc"),
         agent_memory_subdir=get_default_value("agent_memory_subdir", "default"),
         agent_knowledge_subdir=get_default_value("agent_knowledge_subdir", "custom"),
         rfc_auto_docker=get_default_value("rfc_auto_docker", True),
@@ -570,22 +570,21 @@ def get_default_settings() -> Settings:
 def _apply_settings(previous: Settings | None):
     global _settings
     if _settings:
-        from initialize import initialize_agent
-
         from agent import AgentContext
+        from initialize import initialize_agent
 
         config = initialize_agent()
         for ctx in AgentContext.all():
             ctx.config = config  # reinitialize context config with new settings
             # apply config to agents
-            agent = ctx.agent0
+            agent = ctx.gptc
             while agent:
                 agent.config = ctx.config
                 agent = agent.get_data(agent.DATA_NAME_SUBORDINATE)
 
         # reload whisper model if necessary
         if not previous or _settings["stt_model_size"] != previous["stt_model_size"]:
-            defer.DeferredTask().start_task(
+            task = defer.DeferredTask().start_task(
                 whisper.preload, _settings["stt_model_size"]
             )  # TODO overkill, replace with background task
 
@@ -595,13 +594,13 @@ def _apply_settings(previous: Settings | None):
             or _settings["embed_model_provider"] != previous["embed_model_provider"]
             or _settings["embed_model_kwargs"] != previous["embed_model_kwargs"]
         ):
-            from gpt_computer.systems.memory.base import reload as memory_reload
+            from gpt_computer.helpers.memory import reload as memory_reload
 
             memory_reload()
 
         # update mcp settings if necessary
         if not previous or _settings["mcp_servers"] != previous["mcp_servers"]:
-            from gpt_computer.systems.mcp.handler import MCPConfig
+            from gpt_computer.helpers.mcp_handler import MCPConfig
 
             async def update_mcp_settings(mcp_servers: str):
                 PrintStyle(
@@ -652,7 +651,7 @@ def _apply_settings(previous: Settings | None):
                     group="settings-mcp"
                 )
 
-            defer.DeferredTask().start_task(
+            task2 = defer.DeferredTask().start_task(
                 update_mcp_settings, config.mcp_servers
             )  # TODO overkill, replace with background task
 
@@ -663,11 +662,11 @@ def _apply_settings(previous: Settings | None):
         if not previous or current_token != previous["mcp_server_token"]:
 
             async def update_mcp_token(token: str):
-                from gpt_computer.systems.mcp.server import DynamicMcpProxy
+                from gpt_computer.helpers.mcp_server import DynamicMcpProxy
 
                 DynamicMcpProxy.get_instance().reconfigure(token=token)
 
-            defer.DeferredTask().start_task(
+            task3 = defer.DeferredTask().start_task(
                 update_mcp_token, current_token
             )  # TODO overkill, replace with background task
 
@@ -679,7 +678,7 @@ def _apply_settings(previous: Settings | None):
 
                 DynamicA2AProxy.get_instance().reconfigure(token=token)
 
-            defer.DeferredTask().start_task(
+            task4 = defer.DeferredTask().start_task(
                 update_a2a_token, current_token
             )  # TODO overkill, replace with background task
 

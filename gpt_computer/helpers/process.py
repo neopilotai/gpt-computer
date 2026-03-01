@@ -30,7 +30,7 @@ def reload():
 def restart_process():
     PrintStyle.standard("Restarting process...")
     python = sys.executable
-    os.execv(python, [python] + sys.argv)
+    os.execv(python, [gpt_computer] + sys.argv)
 
 def exit_process():
     PrintStyle.standard("Exiting process...")

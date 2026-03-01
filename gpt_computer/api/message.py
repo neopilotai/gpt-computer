@@ -28,7 +28,7 @@ class Message(ApiHandler):
             attachments = request.files.getlist("attachments")
             attachment_paths = []
 
-            upload_folder_int = "/a0/usr/uploads"
+            upload_folder_int = "/gptc/usr/uploads"
             upload_folder_ext = files.get_abs_path("usr/uploads") # for development environment
 
             if attachments:
@@ -63,7 +63,7 @@ class Message(ApiHandler):
         attachment_paths = data.get("attachment_paths", [])
 
         # Store attachments in agent data
-        # context.agent0.set_data("attachments", attachment_paths)
+        # context.gptc.set_data("attachments", attachment_paths)
 
         # Log to console and UI using helper function
         mq.log_user_message(context, message, attachment_paths, message_id)

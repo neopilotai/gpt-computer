@@ -2163,7 +2163,7 @@ files = [
 [[package]]
 name = "importlib-metadata"
 version = "8.7.1"
-description = "Read metadata from Python packages"
+description = "Read metadata from gpt_computer packages"
 optional = false
 python-versions = ">=3.9"
 groups = ["docs"]
@@ -6007,7 +6007,7 @@ sqlcipher = ["sqlcipher3_binary"]
 [[package]]
 name = "stack-data"
 version = "0.6.3"
-description = "Extract data from python stack frames and tracebacks for informative displays"
+description = "Extract data from gpt_computer stack frames and tracebacks for informative displays"
 optional = false
 python-versions = "*"
 groups = ["docs"]

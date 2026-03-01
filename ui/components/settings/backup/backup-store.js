@@ -656,7 +656,7 @@ const model = {
 
     // Check GPT Computer version compatibility
     // Note: Both backup and current versions are obtained via git.get_git_info()
-    const backupVersion = this.backupMetadata.agent_zero_version;
+    const backupVersion = this.backupMetadata.gpt_computer_version;
     const currentVersion = "current"; // Retrieved from git.get_git_info() on backend
 
     if (backupVersion !== currentVersion && backupVersion !== "development") {

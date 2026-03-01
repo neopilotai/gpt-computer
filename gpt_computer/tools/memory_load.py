@@ -1,7 +1,7 @@
 # gpt_computer/tools/memory_load.py
 
-from gpt_computer.systems.memory.base import Memory
 from gpt_computer.helpers.tool import Response, Tool
+from gpt_computer.systems.memory.base import Memory
 
 DEFAULT_THRESHOLD = 0.7
 DEFAULT_LIMIT = 10

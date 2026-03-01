@@ -48,14 +48,14 @@ class ApiFilesGet(ApiHandler):
             for path in paths:
                 try:
                     # Convert internal paths to external paths
-                    if path.startswith("/a0/tmp/uploads/"):
+                    if path.startswith("/gptc/tmp/uploads/"):
                         # Internal path - convert to external
-                        filename = path.replace("/a0/tmp/uploads/", "")
+                        filename = path.replace("/gptc/tmp/uploads/", "")
                         external_path = files.get_abs_path("usr/uploads", filename)
                         filename = os.path.basename(external_path)
-                    elif path.startswith("/a0/"):
+                    elif path.startswith("/gptc/"):
                         # Other internal GPT Computer paths
-                        relative_path = path.replace("/a0/", "")
+                        relative_path = path.replace("/gptc/", "")
                         external_path = files.get_abs_path(relative_path)
                         filename = os.path.basename(external_path)
                     else:

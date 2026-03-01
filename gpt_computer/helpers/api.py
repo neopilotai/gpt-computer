@@ -5,11 +5,11 @@ from abc import abstractmethod
 from typing import Any, Dict, TypedDict, Union
 
 from flask import Flask, Request, Response
-from initialize import initialize_agent
 
 from agent import AgentContext
 from gpt_computer.helpers.errors import format_error
 from gpt_computer.helpers.print_style import PrintStyle
+from initialize import initialize_agent
 
 ThreadLockType = Union[threading.Lock, threading.RLock]
 

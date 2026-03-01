@@ -11,8 +11,8 @@ from langchain_core.documents import Document
 from agent import Agent
 from gpt_computer.helpers.dirty_json import DirtyJson
 from gpt_computer.helpers.log import LogItem
-from gpt_computer.systems.memory.base import Memory
 from gpt_computer.helpers.print_style import PrintStyle
+from gpt_computer.systems.memory.base import Memory
 from gpt_computer.tools.memory_load import DEFAULT_THRESHOLD as DEFAULT_MEMORY_THRESHOLD
 
 

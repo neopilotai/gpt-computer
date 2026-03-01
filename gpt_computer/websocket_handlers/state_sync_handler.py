@@ -7,7 +7,10 @@ from gpt_computer.helpers.state_snapshot import (
     StateRequestValidationError,
     parse_state_request_payload,
 )
-from gpt_computer.systems.communication.websocket import WebSocketHandler, WebSocketResult
+from gpt_computer.systems.communication.websocket import (
+    WebSocketHandler,
+    WebSocketResult,
+)
 
 
 class StateSyncHandler(WebSocketHandler):

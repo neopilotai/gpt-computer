@@ -6,7 +6,10 @@ from typing import Any, Dict
 
 from gpt_computer.helpers import runtime
 from gpt_computer.helpers.print_style import PrintStyle
-from gpt_computer.systems.communication.websocket import WebSocketHandler, WebSocketResult
+from gpt_computer.systems.communication.websocket import (
+    WebSocketHandler,
+    WebSocketResult,
+)
 
 
 class DevWebsocketTestHandler(WebSocketHandler):

@@ -19,9 +19,8 @@ from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_core.documents import Document
 from simpleeval import simple_eval
 
-from gpt_computer.core import llm as models
-
 from agent import Agent, AgentContext
+from gpt_computer.core import llm as models
 
 # faiss needs to be patched for python 3.12 on arm #TODO remove once not needed
 from gpt_computer.helpers import guids, knowledge_import

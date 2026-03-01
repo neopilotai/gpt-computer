@@ -10,7 +10,7 @@ from typing import Iterable
 
 from gpt_computer.helpers.files import get_abs_path
 from gpt_computer.helpers.print_style import PrintStyle
-from gpt_computer.systems.communication.websocket import WebSocketHandler
+from gpt_computer.helpers.websocket import WebSocketHandler
 
 
 @dataclass(frozen=True)
@@ -35,7 +35,7 @@ def _unique_module_name(file_path: str) -> str:
     rel_path = os.path.relpath(file_path, get_abs_path("."))
     rel_no_ext = os.path.splitext(rel_path)[0]
     safe = "".join(ch if ch.isalnum() else "_" for ch in rel_no_ext)
-    return f"a0_ws_ns_{safe}"
+    return f"gptc_ws_ns_{safe}"
 
 
 def _import_module(file_path: str) -> ModuleType:

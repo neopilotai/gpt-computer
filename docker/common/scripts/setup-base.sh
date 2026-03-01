@@ -6,10 +6,10 @@ echo "====================BASE PACKAGES START===================="
 apt-get update && apt-get upgrade -y
 
 # Install standard base utilities
-apt-get install -y --no-install-recommends 
-    sudo curl wget git cron openssh-server ffmpeg supervisor 
-    nodejs npm tesseract-ocr tesseract-ocr-script-latn poppler-utils 
-    locales tzdata 
+apt-get update && apt-get install -y --no-install-recommends --fix-missing \
+    curl wget git cron openssh-server ffmpeg supervisor \
+    nodejs npm tesseract-ocr tesseract-ocr-script-latn poppler-utils \
+    locales tzdata \
     tk tcl
 
 # Set locale to en_US.UTF-8

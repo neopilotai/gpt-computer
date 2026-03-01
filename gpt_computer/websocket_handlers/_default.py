@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from gpt_computer.systems.communication.websocket import WebSocketHandler, WebSocketResult
+from gpt_computer.systems.communication.websocket import (
+    WebSocketHandler,
+    WebSocketResult,
+)
 
 
 class RootDefaultHandler(WebSocketHandler):

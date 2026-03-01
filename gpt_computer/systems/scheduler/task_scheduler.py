@@ -30,7 +30,6 @@ from typing import Annotated
 import pytz
 
 from crontab import CronTab
-from initialize import initialize_agent
 from pydantic import BaseModel, Field, PrivateAttr
 
 from gpt_computer.core.context import AgentContext, UserMessage
@@ -40,6 +39,7 @@ from gpt_computer.helpers.files import get_abs_path, make_dirs, read_file, write
 from gpt_computer.helpers.localization import Localization
 from gpt_computer.helpers.persist_chat import save_tmp_chat
 from gpt_computer.helpers.print_style import PrintStyle
+from initialize import initialize_agent
 
 SCHEDULER_FOLDER = "usr/scheduler"
 
@@ -865,7 +865,7 @@ class TaskScheduler:
                 # This is critical for the polling mechanism to find and stream logs
                 # Dict operations are atomic
                 # AgentContext._contexts[context.id] = context
-                agent = context.streaming_agent or context.agent0
+                agent = context.streaming_agent or context.gptc
 
                 # Prepare attachment filenames for logging
                 attachment_filenames = []

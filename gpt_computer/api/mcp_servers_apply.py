@@ -3,8 +3,8 @@ import time
 from typing import Any
 
 from gpt_computer.helpers.api import ApiHandler, Request, Response
-from gpt_computer.systems.mcp.handler import MCPConfig
 from gpt_computer.helpers.settings import set_settings_delta
+from gpt_computer.systems.mcp.handler import MCPConfig
 
 
 class McpServersApply(ApiHandler):

@@ -11,8 +11,7 @@ USER_DIR = "usr"
 DEFAULT_AGENTS_DIR = "agents"
 USER_AGENTS_DIR = "usr/agents"
 
-if TYPE_CHECKING:
-    Origin = Literal["default", "user", "project"]
+type Origin = Literal["default", "user", "project"]
 
 if TYPE_CHECKING:
     from agent import Agent

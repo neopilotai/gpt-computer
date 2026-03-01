@@ -423,9 +423,10 @@ def main(
     load_env_if_needed()
 
     if autonomous:
-        from gpt_computer.core.agent_runtime import AgentRuntime
         import asyncio
-        
+
+        from gpt_computer.core.agent_runtime import AgentRuntime
+
         runtime = AgentRuntime()
         prompt_text = "Hello, what can you do?"
         if os.path.isfile(prompt_file):
@@ -433,7 +434,7 @@ def main(
                 prompt_text = f.read()
         elif prompt_file != "prompt":
             prompt_text = prompt_file
-            
+
         asyncio.run(runtime.run(prompt_text))
         return
 
